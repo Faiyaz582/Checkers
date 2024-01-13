@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/screens/signin_screen.dart';
-import 'package:untitled1/screens/signup_screen.dart';
+import 'package:untitled1/login/login_page.dart';
 import 'package:untitled1/theme/theme.dart';
 import 'package:untitled1/widgets/custom_scaffold.dart';
 import 'package:untitled1/widgets/welcome_button.dart';
@@ -43,15 +42,6 @@ class _UserState extends State<User>  {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      /*TextSpan(
-                        text:
-                        '\nFood.Specialty.Review',
-                        style: TextStyle(
-                          fontSize: 20,
-                          // height: 0,
-                        ),
-                      ),*/
-
                     ],
                   ),
                 ),
@@ -69,7 +59,7 @@ class _UserState extends State<User>  {
                   const Expanded(
                     child: WelcomeButton(
                       buttonText: 'Sign in ',
-                      onTap: SignInScreen(),
+                      onTap: LoginPage(),
                       color: Colors.transparent,
                       textColor:  Colors.white ,
                     ),
