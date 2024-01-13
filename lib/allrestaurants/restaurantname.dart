@@ -1,36 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/page/profile_page.dart';
-import 'package:untitled1/allrestaurants/restaurant1.dart';
-import 'package:untitled1/allrestaurants/restaurant2.dart';
-import 'package:untitled1/allrestaurants/restaurant3.dart';
-import 'package:untitled1/allrestaurants/restaurant4.dart';
-import 'myDrawerr.dart';
+import 'package:untitled1/screens/user.dart';
+import 'package:untitled1/allrestaurants/Restaurant1.dart';
+import 'package:untitled1/allrestaurants/Restaurant2.dart';
+import 'package:untitled1/allrestaurants/Restaurant3.dart';
+import 'package:untitled1/allrestaurants/Restaurant4.dart';
+import 'package:untitled1/screens/applogo.dart';
+import 'package:untitled1/widgets/custom_scaffold.dart';
 
-class MenuPage extends StatelessWidget {
-  const MenuPage({Key? key});
+class AllRestaurants extends StatefulWidget {
+  const AllRestaurants({super.key});
+  //const AllRestaurants({Key? key}) : super(key: key);
 
   @override
+  State<AllRestaurants> createState() => _AllRestaurantsState();
+}
+
+class _AllRestaurantsState extends State<AllRestaurants> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black54,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-            size: 30,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop(); // Go back
-          },
-        ),
-
-        backgroundColor: Colors.black,
-
-      ),
-    body: Stack(
+    return CustomScaffold(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-         // applogo(),
+          applogo(),
           SizedBox(height: 130), // Adjust the height as needed
           ElevatedButton(
             onPressed: () {
@@ -77,7 +69,7 @@ class MenuPage extends StatelessWidget {
               child: const Text('Restaurant2', style: TextStyle(fontSize: 20)),
             ),
           ),
-          SizedBox(height: 100), // Adjust the height as needed
+          SizedBox(height: 130), // Adjust the height as needed
           ElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -125,11 +117,7 @@ class MenuPage extends StatelessWidget {
           ),
         ],
       ),
-      endDrawer: MyDrawer(),
     );
   }
 }
-
-
-
 

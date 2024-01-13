@@ -6,6 +6,8 @@ import 'package:untitled1/widgets/custom_scaffold.dart';
 import 'package:untitled1/widgets/welcome_button.dart';
 import 'package:untitled1/screens/applogo.dart';
 
+import '../signup/signup_page.dart';
+
 class User extends StatefulWidget {
   const User({super.key});
 
@@ -75,7 +77,7 @@ class _UserState extends State<User>  {
                   Expanded(
                     child: WelcomeButton(
                       buttonText: 'Sign up',
-                      onTap: const SignUpScreen(),
+                      onTap: const SignupPage(),
                       color: Colors.white,
                       textColor:  lightColorScheme.primary,
                     ),

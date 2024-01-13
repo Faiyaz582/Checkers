@@ -1,13 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import 'package:untitled1/theme/theme.dart';
 import 'package:untitled1/widgets/custom_scaffold.dart';
 import 'package:untitled1/screens/signin_screen.dart';
-import 'package:untitled1/screens/restaurantname.dart';
+import 'package:untitled1/page/MenuPage.dart';
 import '../theme/theme.dart';
 
 class SignUpScreen extends StatefulWidget {
+  /*final Function ()? onTap;
+  const SignUpScreen({super.key, required this.onTap});*/
   const SignUpScreen({super.key});
 
   @override
@@ -17,6 +20,32 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formSignupKey = GlobalKey<FormState>();
   bool agreePersonalData = true;
+  final emailTextController = TextEditingController();
+  final passwordTextController = TextEditingController();
+  bool rememberPassword = true;
+  @override
+  void signIn () async {
+    //show loading circle
+    showDialog(context: context,
+      builder: (context)=>const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailTextController.text,
+          password: passwordTextController.text);
+
+      //pop loading circle
+      if (context.mounted) Navigator.pop(context);
+
+    } on FirebaseAuthException catch (e) {
+      //pop loading circle
+      Navigator.pop (context);
+      //displayMessage (e.code);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -191,7 +220,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => RestaurantName()),
+                                MaterialPageRoute(builder: (context) => MenuPage()),
                               );
 
                            // onTap: const MenuPage();

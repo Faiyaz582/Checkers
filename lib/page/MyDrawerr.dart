@@ -11,6 +11,7 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       backgroundColor: Colors.black54,
+      width: MediaQuery.of(context).size.width * 100.0,
       child : Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(

@@ -6,6 +6,7 @@ class WelcomeButton extends StatelessWidget {
   final Widget? onTap;
   final Color? color;
   final Color? textColor;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

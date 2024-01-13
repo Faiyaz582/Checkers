@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:untitled1/widgets/custom_scaffold.dart';
 import 'package:untitled1/screens/welcome_screen.dart';
 import 'package:untitled1/screens/applogo.dart';
+import 'auth/login_or_register.dart';
 import 'home.dart';
 
 class Splash extends StatefulWidget {
@@ -16,7 +17,8 @@ class _SplashState extends State<Splash> {
   startTimer() {
     Timer(const Duration(seconds: 3), () async {
       Navigator.push(
-          context, MaterialPageRoute(builder: (c) => const WelcomeScreen()));
+          //context, MaterialPageRoute(builder: (c) => const LoginOrResigter()));
+         context, MaterialPageRoute(builder: (c) => const WelcomeScreen()));
     });
   }
 
