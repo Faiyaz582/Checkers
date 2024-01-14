@@ -93,7 +93,7 @@ class _SignupPageState extends State<SignupPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Already have an account\t\t"),
+                      Text("Already have an account?\t\t"),
                       GestureDetector(
                           onTap: (){
                             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPage(),));
