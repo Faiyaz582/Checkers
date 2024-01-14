@@ -1,10 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:untitled1/home.dart';
 import 'package:untitled1/screens/welcome_screen.dart';
 import 'package:untitled1/signup/components/signup_auth_provider.dart';
+import 'package:untitled1/signup/signup_page.dart';
 import 'package:untitled1/splash.dart';
 import "package:untitled1/firebase_options.dart";
+
+import 'login/components/login_auth_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -23,12 +27,20 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(
             create: (context)=>SignupAuthProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context)=>LoginAuthProvider(),
           )
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
+            appBarTheme: AppBarTheme(
+              iconTheme: IconThemeData(
+                color: Colors.black,
+              ),
+            ),
             // This is the theme of your application.
             //
             // TRY THIS: Try running your application with "flutter run". You'll see
@@ -53,7 +65,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
+//
 
 
 

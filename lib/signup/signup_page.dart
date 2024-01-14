@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled1/login/login_page.dart';
 import 'package:untitled1/signup/components/signup_auth_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,10 @@ class _SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     SignupAuthProvider signupAuthProvider=Provider.of<SignupAuthProvider>(context);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        elevation: 0,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -85,11 +90,15 @@ class _SignupPageState extends State<SignupPage> {
                   SizedBox(
                     height: 20,
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Already have an account\t\t"),
-                      Text("Log in"),
+                      GestureDetector(
+                          onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPage(),));
+                          },
+                          child: const Text("Sign in"),),
                     ],
                   )
                 ],

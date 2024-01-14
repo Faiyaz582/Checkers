@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:untitled1/widgets/custom_scaffold.dart';
 import 'package:untitled1/screens/welcome_screen.dart';
 import 'package:untitled1/screens/applogo.dart';
-import 'auth/login_or_register.dart';
-import 'home.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -41,11 +39,7 @@ class _SplashState extends State<Splash> {
           Flexible(
             flex: 2,
             child: Container(
-              //margin: EdgeInsets.fromViewPadding(),
-              /*padding: const EdgeInsets.symmetric(
-                vertical: 120,
-                horizontal: 40.0,
-              ),*/
+
               child: Center(
 
                 child: RichText(
@@ -60,14 +54,7 @@ class _SplashState extends State<Splash> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      /*TextSpan(
-                        text:
-                        '\nFood.Specialty.Review',
-                        style: TextStyle(
-                          fontSize: 20,
-                          // height: 0,
-                        ),
-                      ),*/
+
 
                     ],
                   ),
