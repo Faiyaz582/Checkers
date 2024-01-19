@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'login/login_page.dart';
 class MyHomePage extends StatefulWidget {
- // const MyHomePage({super.key, required this.title});
+  // const MyHomePage({super.key, required this.title});
   const MyHomePage({super.key});
   //final String title;
 
@@ -22,10 +22,10 @@ class _MyHomePageState extends State<MyHomePage> {
             FirebaseAuth.instance.signOut().then((value) => Navigator.of(context).push(
               MaterialPageRoute(builder: (context)=>LoginPage(),),),);
           },
-              icon: Icon(
-        Icons.exit_to_app,
-    ),
-    )
+            icon: Icon(
+              Icons.exit_to_app,
+            ),
+          )
         ],
 
       ),
