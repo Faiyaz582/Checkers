@@ -1,57 +1,61 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled1/home.dart';
 import 'package:untitled1/page/MenuPage.dart';
 
-class SignupAuthProvider with ChangeNotifier {
+import '../../allrestaurants/rest_home.dart';
+import '../../home_for_restaurant.dart';
+
+class SignupAuthProviderForRestaurant with ChangeNotifier {
 
   static Pattern pattern =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-  RegExp regExp = RegExp(SignupAuthProvider.pattern.toString());
+  RegExp regExp = RegExp(SignupAuthProviderForRestaurant.pattern.toString());
   UserCredential? userCredential;
 
   bool loading = false;
   void signupValidation({
-    required TextEditingController? fullName,
-    required TextEditingController? emailAddress,
-    required TextEditingController? password,
+    required TextEditingController? fullRestaurantName,
+    required TextEditingController? restaurantEmailAddress,
+    required TextEditingController? restaurantPassword,
     required BuildContext context
   }) async {
-    if (fullName!.text.trim().isEmpty) {
+    if (fullRestaurantName!.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-              "Full name is empty"
+              "Restaurant name is empty"
           ),
         ),
       );
       return;
     }
-    else if (emailAddress!.text.trim().isEmpty) {
+    else if (restaurantEmailAddress!.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-              "Email Address is empty"
+              "Email Address for restaurant is empty"
           ),
         ),
       );
       return;
     }
-    else if (!regExp.hasMatch(emailAddress.text.trim())) {
+    else if (!regExp.hasMatch(restaurantEmailAddress.text.trim())) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Invalid email address"),
         ),
       );
       return;
-    } else if (password!.text.trim().isEmpty) {
+    } else if (restaurantPassword!.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Password is empty"),
         ),
       );
       return;
-    } else if (password.text.length < 8) {
+    } else if (restaurantPassword.text.length < 8) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Password must be 8"),
@@ -59,7 +63,7 @@ class SignupAuthProvider with ChangeNotifier {
       );
       return;
     }
-    else if (!emailAddress.text.trim().toLowerCase().endsWith('@gmail.com')) {
+    else if (!restaurantEmailAddress.text.trim().toLowerCase().endsWith('@gmail.com')) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Only Gmail accounts are allowed"),
@@ -72,18 +76,18 @@ class SignupAuthProvider with ChangeNotifier {
         notifyListeners();
         userCredential =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailAddress.text,
-          password: password.text,
+          email: restaurantEmailAddress.text,
+          password: restaurantPassword.text,
         );
         loading = true;
         notifyListeners();
-        FirebaseFirestore.instance.collection("users")
+        FirebaseFirestore.instance.collection("Restaurant names")
             .doc(userCredential!.user!.uid)
             .set(
           {
-            "fullName": fullName.text,
-            "emailAddress": emailAddress.text,
-            "password": password.text,
+            "fullName": fullRestaurantName.text,
+            "emailAddress": restaurantEmailAddress.text,
+            "password": restaurantPassword.text,
             "userUid": userCredential!.user!.uid,
           },
         ).then((value) {
@@ -91,7 +95,8 @@ class SignupAuthProvider with ChangeNotifier {
           notifyListeners();
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context)=>MenuPage(),
+              builder: (context)=>RestHome(),
+              //
             ),
           );
         });
