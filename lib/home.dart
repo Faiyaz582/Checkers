@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled1/page/MenuPage.dart';
+import 'package:untitled1/page/MyDrawerr.dart';
 import 'rest_page.dart'; // Ensure the correct import for RestPage
 
 import 'login/login_page.dart';
@@ -15,11 +17,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         title: Center(
           child: Text("Checkers"),
         ),
-        actions: [
+
+       /* actions: [
           IconButton(
             onPressed: () {
               FirebaseAuth.instance.signOut().then(
@@ -34,8 +38,9 @@ class _MyHomePageState extends State<MyHomePage> {
               Icons.exit_to_app,
             ),
           ),
-        ],
+        ],*/
       ),
+      endDrawer: MyDrawer(),
       body: GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) => RestPage()));
