@@ -20,25 +20,31 @@ class _ReviewPageState extends State<ReviewPage> {
 
   //post message method
   void postMessage() {
-
-    //only post message if there is something in the text field
+    // Only post message if there is something in the text field
     if (textController.text.isNotEmpty) {
-      //store ub firebase
+      // Store in Firebase
       FirebaseFirestore.instance.collection("UserPosts").add({
         'UserEmail': currentUser.email,
         'Message': textController.text,
         'Timestamp': Timestamp.now(),
+        'Likes': [],
       });
     }
+
+    // Clear the text field after a short delay
+    Future.delayed(Duration(milliseconds: 100), () {
+      setState(() {
+        textController.clear();
+      });
+    });
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text("Reviews"),
-      ),
+
       body: Center(
         child: Column (
           children: [
@@ -55,7 +61,8 @@ class _ReviewPageState extends State<ReviewPage> {
                         // get the message
                         final post = snapshot.data!.docs[index];
                         return WallPost(
-                            message: post['Message'], user: post['UserEmail']
+                            message: post['Message'], user: post['UserEmail'], postId: post.id,
+                          likes: List<String>.from(post['Likes']?? []),
                         );
                       },
                     );
@@ -75,7 +82,7 @@ class _ReviewPageState extends State<ReviewPage> {
 
             // post message
             Padding(
-              padding: const EdgeInsets.all(25.0),
+              padding: const EdgeInsets.all(15.0),
               child: Row (
                 children: [
                   //textfield
@@ -97,7 +104,12 @@ class _ReviewPageState extends State<ReviewPage> {
             ),
 
             //logged in as
-            Text ('Logged in as: '+currentUser.email!),
+            Text ('Logged in as: '+currentUser.email!,
+            style: TextStyle(color: Colors.grey),),
+
+            const SizedBox(
+              height: 20,
+            )
           ],
         ),
       )
